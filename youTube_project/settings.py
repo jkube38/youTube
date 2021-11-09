@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wwq6*grt5c_t)k5=l&v9f#j*us)tt5#axag!rhm=!n%@+4%a_d'
+SECRET_KEY = config('YOU_TUBE_DOWNLOADER_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -149,5 +150,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Deployment email
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-
+EMAIL_HOST_USER = config('MY_EMAIL')
+EMAIL_HOST_PASSWORD = config('MY_EMAIL_PASS')
 EMAIL_USE_TLS = True
