@@ -1,0 +1,65 @@
+{% extends 'header.html' %}
+{% block content%}
+<style>
+    #loginFormHolder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    #login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #id_username {
+        margin-bottom: 10px;
+    }
+
+    #id_password {
+        margin-bottom: 20px;
+    }
+
+    #loginError {
+        font-family: 'Roboto', sans-serif;
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+        padding: 0 5px 0 5px;
+        border-left: red solid 2px;
+        border-bottom: red solid 2px;
+        margin-top: 0;
+    }
+
+    #forgot {
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        color: red;
+        margin-bottom: 10px;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='loginFormHolder'>
+        <form id='login' action='' method='post'>
+            {% csrf_token %}
+            {{form}}
+            <input type='submit' value='login' id='login'>
+        </form>
+        <a href='/resetrequest/' id='forgot'>Forgot Password</a>
+        {% if login_error %}
+            <h3 id='loginError'>{{ login_error }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

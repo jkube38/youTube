@@ -1,0 +1,114 @@
+{% extends 'header.html' %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    #formHolder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0 0 0;
+        position: relative; top: -400px;
+    }
+
+    #signUp {
+        display: flex;
+        flex-direction: column;
+        margin: 5px 0 5px 0;
+        width: 160px;
+    }
+
+    #instruct {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #linkHere{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #subLink {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #loginLink {
+        font-family: 'Roboto', sans-serif;
+        text-decoration: none;
+        color: red;
+    }
+
+    #id_username {
+        margin: 5px 0 5px 0;
+    }
+
+    #id_email {
+        margin: 5px 0 5px 0;
+    }
+
+    #id_password {
+        margin: 5px 0 5px 0;
+    }
+
+    #id_password2 {
+        margin: 5px 0 5px 0;
+    }
+
+    .errors {
+        font-family: 'Roboto', sans-serif;
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+        padding: 0 5px 0 5px;
+        border-left: red solid 2px;
+        border-bottom: red solid 2px;
+    }
+
+    #thumbHolder {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+    }
+
+    .thumbs {
+        width: 33%;
+        opacity: .5;
+    }
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader | Sign Up</title>
+</head>
+<body>
+    <div id='thumbHolder'>
+        {% for thumb in form_background %}
+            <img src={{thumb.0}} alt='{{thumb.1}} thumbnail' class="thumbs">
+        {% endfor %}
+    </div>
+    <div id='formHolder'>
+        <h2 id='instruct'>Sign Up or Login</h2>
+        <form id='signUp' action='' method='post'>
+            {% csrf_token %}
+            {{form}}
+            <input type='submit' value='Sign Up' id='subLink'>
+        </form>
+        <a href='login/' id='loginLink'><h2>LOGIN</h2></a>
+        {% if unique_username and unique_email %}
+            <h3 class='errors'>{{unique_username}}</h3>
+            <h3 class='errors'>{{unique_email}}</h3>
+        {% elif unique_username %}
+            <h3 class='errors'>{{unique_username}}</h3>
+        {% elif  unique_email %}
+            <h3 class='errors'>{{unique_email}}</h3>
+        {% elif passwords %}
+            <h3 class='errors'>{{passwords}}</h3>
+        {% endif %}
+        
+    </div>
+    
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'header.html' %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+    #pageHolder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #ytLink {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+    }
+
+    #welcome {
+        font-family: 'Roboto', sans-serif;
+        color: red;
+    }
+
+    #linkHere {
+        margin: 10px 0 10px 0;
+    }
+
+    #recentHolder {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .singleDownload {
+        display: flex;
+        flex-direction: column;
+        width: 23%;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='pageHolder'>
+        <h2 id='welcome'>Welcome {{request.user.username}}</h2>
+        <form id='ytLink' action='' method='post'>
+            {% csrf_token %}
+            {{form}}
+            <input type='submit' value='Get Streams' id='getStreams'>
+        </form>
+    </div>
+    <div id='recentHolder'>
+        {% for download in user_downloads %}
+            <div class="singleDownload">
+                <img src={{download.thumb}} alt='video thumb' class='thumbs'>
+                <h4 class='downloadTitle'>{{download.title}}</h4>
+                <h4 class='downloadUrl'>{{download.url}}</h4>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+{% endblock %}

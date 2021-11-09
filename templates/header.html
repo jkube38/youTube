@@ -1,0 +1,44 @@
+{% load static %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+    #mainHeader {
+        height: 100px;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #youTubeLogo {
+        height: 50%;
+        margin-right: 20px;
+    }
+
+    #nav {
+        display: flex;
+        justify-content: space-around;
+        background-color: red;
+    }
+
+    .navLinks {
+        font-family: 'Roboto', sans-serif;
+        text-decoration: none;
+        color: white;
+
+    }
+</style>
+
+<div id='mainHeader'>
+<a href='/'><img src='/static/youTubeLogo.png' alt='you tube logo' id='youTubeLogo'></a>
+</div>
+<div id='nav'>
+    {% if request.user.is_authenticated %}
+        <a href='/user/{{request.user.username}}' id='profile' class="navLinks">PROFILE</a>
+        <a href='/updateprofile/{{request.user.username}}' id='updateProfile' class='navLinks'>UPDATE PROFILE</a>
+        <a href='/logout' id='logout' class='navLinks'>LOGOUT</a>
+    {% endif %}
+</div>
+
+{% block content %}
+{% endblock %}
